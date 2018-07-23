@@ -1,0 +1,272 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "b. b. assistant",
+            "intents": [
+                {
+                    "name": "OpenCourseEvent",
+                    "slots": [
+                        {
+                            "name": "courseName",
+                            "type": "AMAZON.SearchQuery",
+                            "samples": [
+                                "{courseName}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "select course {courseName}",
+                        "select course",
+                        "get my {courseName} course",
+                        "open my {courseName} course",
+                        "get course {courseName}",
+                        "open course {courseName}",
+                        "get course",
+                        "open course"
+                    ]
+                },
+                {
+                    "name": "AMAZON.ReadAction<object@Calendar>",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.SearchAction<object@Calendar>",
+                    "samples": []
+                },
+                {
+                    "name": "CreateCalendarEvent",
+                    "slots": [
+                        {
+                            "name": "title",
+                            "type": "AMAZON.SearchQuery",
+                            "samples": [
+                                "{title}"
+                            ]
+                        },
+                        {
+                            "name": "startDate",
+                            "type": "AMAZON.DATE",
+                            "samples": [
+                                "{startTime} on {startDate} for {duration}",
+                                "{startTime} on {startDate}",
+                                "{startDate} at {startTime}",
+                                "{startDate} at {startTime} for {duration}",
+                                "{startDate}"
+                            ]
+                        },
+                        {
+                            "name": "startTime",
+                            "type": "AMAZON.TIME",
+                            "samples": [
+                                "{startTime}"
+                            ]
+                        },
+                        {
+                            "name": "duration",
+                            "type": "AMAZON.DURATION",
+                            "samples": [
+                                "{duration}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "add a calendar item",
+                        "create a calendar item",
+                        "add calendar item",
+                        "create calendar item",
+                        "add a calendar event",
+                        "create a calendar event",
+                        "add calendar event",
+                        "create calendar event"
+                    ]
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "NextAssignmentEvent",
+                    "slots": [],
+                    "samples": [
+                        "what is my next assignment",
+                        "when is my next assignment due",
+                        "tell me my next assignment",
+                        "when is my next assignment"
+                    ]
+                },
+                {
+                    "name": "SwitchUser",
+                    "slots": [],
+                    "samples": [
+                        "change user",
+                        "switch user",
+                        "logout"
+                    ]
+                },
+                {
+                    "name": "ShowGrades",
+                    "slots": [],
+                    "samples": [
+                        "show me the course grades",
+                        "show me the grades",
+                        "bell curve",
+                        "Send me the bell curve"
+                    ]
+                },
+                {
+                    "name": "PublishGrades",
+                    "slots": [],
+                    "samples": [
+                        "publish the course grades",
+                        "publish my course grades",
+                        "publish course grades",
+                        "publish grades"
+                    ]
+                },
+                {
+                    "name": "CurrentActiveCourse",
+                    "slots": [],
+                    "samples": [
+                        "what course is selected",
+                        "what is the active course",
+                        "active course",
+                        "what is the current course"
+                    ]
+                },
+                {
+                    "name": "CurrentGrade",
+                    "slots": [],
+                    "samples": [
+                        "tell me my current grade",
+                        "tell me my grade",
+                        "what is my current grade",
+                        "what is my grade"
+                    ]
+                }
+            ],
+            "types": []
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "CreateCalendarEvent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "title",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.699481733074.168373850415"
+                            }
+                        },
+                        {
+                            "name": "startDate",
+                            "type": "AMAZON.DATE",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.699481733074.156543218180"
+                            }
+                        },
+                        {
+                            "name": "startTime",
+                            "type": "AMAZON.TIME",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.699481733074.521195147922"
+                            }
+                        },
+                        {
+                            "name": "duration",
+                            "type": "AMAZON.DURATION",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.699481733074.1239515998559"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "OpenCourseEvent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "courseName",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1491055410299.1114424031578"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.699481733074.168373850415",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Please tell me the name of this event?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "What is the name of this event?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.699481733074.156543218180",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "When is this event?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.699481733074.521195147922",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What time does this event start?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.699481733074.1239515998559",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "How long is this event?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1491055410299.1114424031578",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Please tell me the course name you would like to work with."
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -3,6 +3,8 @@
 ### Project at a Glance:
 
 * Blackboard Learn 3400.9.0 (soon to be released) minimum
+  * An Amazon EC2 AMI Instance can be found in the AWS Marketplace [Blackboard Learn for REST and LTI Developers](https://aws.amazon.com/marketplace/pp/B077T4SX2B)
+  * [Using the Blackboard Learn AMI for REST and LTI Development](https://community.blackboard.com/docs/DOC-4242-using-the-developer-ami)
 * Version: Beta  v1.0b20101128
 * Tested on 3400.9.0
 * Languages: Javascript ES8 / Node.js

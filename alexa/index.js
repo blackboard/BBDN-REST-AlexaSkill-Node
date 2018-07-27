@@ -145,7 +145,7 @@ const OpenCourseHandler = {
     if (requiredSlots.every(slotFilled(currentIntent))) {
       const courseName = currentIntent.slots.courseName.value;
       const course = await bbService.getCourseByName(getAccessToken(handlerInput), courseName)
-      if ( course !== undefined ) {
+      if (course) {
         console.log('Found course: ', course);
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         sessionAttributes.courseId = course.id;
@@ -178,16 +178,16 @@ const CurrentActiveCourseHandler = {
   async handle(handlerInput) {
     const courseId = handlerInput.attributesManager.getSessionAttributes().courseId;
 
-    if (courseId === undefined) {
-      return handlerInput.responseBuilder
-        .speak('You have not selected a course. You can select a course by saying: open course, or select course.')
-        .reprompt('You can select a course by saying: open course, or select course.')
-        .getResponse();
-    } else {
+    if (courseId) {
       const course = await bbService.getCourseById(getAccessToken(handlerInput), courseId);
       return handlerInput.responseBuilder
         .speak(`The active course is: ${course.name}. What else can I help you with?`)
         .reprompt('What else can I help you with?')
+        .getResponse();
+    } else {
+      return handlerInput.responseBuilder
+        .speak('You have not selected a course. You can select a course by saying: open course, or select course.')
+        .reprompt('You can select a course by saying: open course, or select course.')
         .getResponse();
     }
   }
@@ -208,7 +208,7 @@ const CurrentGradeHandler = {
       bbService.getCourseMembership(accessToken, sessionAttributes.courseId)
     ]);
 
-    if (courseMembership === undefined) {
+    if (!courseMembership) {
       return handlerInput.responseBuilder
         .speak(`You are not enrolled in ${course.name}.`)
         .reprompt('What else can I help you with?')
@@ -243,7 +243,7 @@ const ShowBellCurveHandler = {
       bbService.getCourseMembership(accessToken, sessionAttributes.courseId)
     ]);
 
-    if (courseMembership === undefined || courseMembership.courseRoleId !== 'Instructor') {
+    if (!courseMembership || courseMembership.courseRoleId !== 'Instructor') {
       return handlerInput.responseBuilder
         .speak(`You are not an instructor for ${course.name}. What else can I help you with?`)
         .reprompt('What else can I help you with?')
@@ -279,7 +279,7 @@ const PublishBellCurveHandler = {
       bbService.getCourseMembership(accessToken, sessionAttributes.courseId)
     ]);
 
-    if (courseMembership === undefined || courseMembership.courseRoleId !== 'Instructor') {
+    if (!courseMembership || courseMembership.courseRoleId !== 'Instructor') {
       return handlerInput.responseBuilder
         .speak(`You are not an instructor for ${course.name}. What else can I help you with?`)
         .reprompt('What else can I help you with?')
@@ -441,7 +441,7 @@ UnlinkedAccountException.prototype.constructor = UnlinkedAccountException;
 
 const getAccessToken = handlerInput => {
   const accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
-  if (accessToken === undefined) {
+  if (!accessToken) {
     throw new UnlinkedAccountException('The account is not linked');
   }
   return accessToken;
